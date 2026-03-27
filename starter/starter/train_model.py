@@ -1,3 +1,4 @@
+import re
 import pandas as pd
 # Script to train machine learning model.
 from sklearn.model_selection import train_test_split
@@ -8,7 +9,11 @@ from ml.model import train_model, save_model, compute_model_metrics, inference
 
 # Add code to load in the data.
 data = pd.read_csv('./data/census.csv')
+# Remove any containing whitespaces from dataset.
 data.columns = data.columns.str.strip()
+data = data.applymap(
+    lambda x: re.sub(r"\s+", " ", x).strip() if isinstance(x, str) else x
+)
 
 # Optional enhancement, use K-fold cross validation instead of a train-test split.
 train, test = train_test_split(data, test_size=0.20)
