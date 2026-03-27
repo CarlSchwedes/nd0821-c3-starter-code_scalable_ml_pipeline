@@ -1,5 +1,6 @@
+import pickle
 from sklearn.metrics import fbeta_score, precision_score, recall_score
-
+from sklearn.ensemble import RandomForestClassifier
 
 def train_model(X_train, y_train):
     """
@@ -16,8 +17,19 @@ def train_model(X_train, y_train):
     model : RandomForestClassifier
         Trained machine learning model.
     """
-    pass
+    rf_clss_model = RandomForestClassifier()
+    rf_clss_model.fit(X_train, y_train)
 
+    return rf_clss_model
+
+def save_model(model, path):
+    with open(path, 'wb') as file:
+        pickle.dump(model, file)
+
+def load_model(path):
+    with open(path, 'rb') as file:
+        model = pickle.load(file)
+    return model
 
 def compute_model_metrics(y, preds):
     """
@@ -40,8 +52,10 @@ def compute_model_metrics(y, preds):
     recall = recall_score(y, preds, zero_division=1)
     return precision, recall, fbeta
 
+def compute_model_metrics_on_data_sclices(y, preds):
+    pass
 
-def inference(model, X):
+def inference(model : RandomForestClassifier, X):
     """ Run model inferences and return the predictions.
 
     Inputs
@@ -55,4 +69,4 @@ def inference(model, X):
     preds : np.ndarray
         Predictions from the model.
     """
-    pass
+    return model.predict(X)
