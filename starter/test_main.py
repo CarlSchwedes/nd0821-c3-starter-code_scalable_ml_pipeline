@@ -53,7 +53,6 @@ def test_post_inference_high_income():
             "/inference",
             json=input_data.iloc[0, :].to_dict()
         )
-
     assert response.status_code == 200
     assert "prediction" in response.json()
     assert response.json() == {"prediction": ">50K"}
@@ -78,7 +77,6 @@ def test_post_inference_low_income():
             "/inference",
             json=input_data.iloc[0, :].to_dict()
         )
-
     assert response.status_code == 200
     assert "prediction" in response.json()
     assert response.json() == {"prediction": "<=50K"}
@@ -90,7 +88,8 @@ def test_post_inference_low_income():
 def test_post_inference_missing_field():
     """Should fail because required fields are missing."""
 
-    response = client.post("/inference", json={})
+    with TestClient(app) as client:
+        response = client.post("/inference", json={})
     assert response.status_code == 422  # validation error
 
 
@@ -98,8 +97,8 @@ def test_post_inference_invalid_type():
     """Should fail if type is incorrect (age must be int)."""
 
     invalid_payload = {"age": "not-an-integer"}
-    response = client.post("/inference", json=invalid_payload)
-
+    with TestClient(app) as client:
+        response = client.post("/inference", json=invalid_payload)
     assert response.status_code == 422
 
 
@@ -126,6 +125,5 @@ def test_post_inference_alias_hyphen_support():
 
     with TestClient(app) as client:
         response = client.post("/inference", json=payload)
-        
     assert response.status_code == 200
     assert "prediction" in response.json()
