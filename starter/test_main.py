@@ -48,10 +48,11 @@ def test_post_inference_high_income():
         columns=full_feature_list
     )
 
-    response = client.post(
-        "/inference",
-        json=input_data.iloc[0, :].to_dict()
-    )
+    with TestClient(app) as client:
+        response = client.post(
+            "/inference",
+            json=input_data.iloc[0, :].to_dict()
+        )
 
     assert response.status_code == 200
     assert "prediction" in response.json()
@@ -72,10 +73,11 @@ def test_post_inference_low_income():
         columns=full_feature_list
     )
 
-    response = client.post(
-        "/inference",
-        json=input_data.iloc[0, :].to_dict()
-    )
+    with TestClient(app) as client:
+        response = client.post(
+            "/inference",
+            json=input_data.iloc[0, :].to_dict()
+        )
 
     assert response.status_code == 200
     assert "prediction" in response.json()
@@ -122,6 +124,8 @@ def test_post_inference_alias_hyphen_support():
         "hours-per-week": 40
     }
 
-    response = client.post("/inference", json=payload)
+    with TestClient(app) as client:
+        response = client.post("/inference", json=payload)
+        
     assert response.status_code == 200
     assert "prediction" in response.json()
