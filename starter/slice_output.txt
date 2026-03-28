@@ -1,554 +1,343 @@
 === Feature: workclass ===
-  Slice: ?
-    Precision: 0.6061
-    Recall:    0.6061
-    FBeta:     0.6061
-    N:         381
-
   Slice: Private
-    Precision: 0.7273
-    Recall:    0.6234
-    FBeta:     0.6713
-    N:         4561
-
-  Slice: Self-emp-inc
-    Precision: 0.7603
-    Recall:    0.7023
-    FBeta:     0.7302
-    N:         226
-
-  Slice: Local-gov
-    Precision: 0.7925
-    Recall:    0.6316
-    FBeta:     0.7029
-    N:         395
+    Precision: 0.6345
+    Recall:    0.8152
+    F-Beta:    0.7136
+    N:         4578
 
   Slice: State-gov
-    Precision: 0.7971
-    Recall:    0.6790
-    FBeta:     0.7333
-    N:         269
+    Precision: 0.6556
+    Recall:    0.8082
+    F-Beta:    0.7239
+    N:         254
 
   Slice: Self-emp-not-inc
-    Precision: 0.7273
-    Recall:    0.5373
-    FBeta:     0.6180
-    N:         478
+    Precision: 0.6098
+    Recall:    0.6369
+    F-Beta:    0.6231
+    N:         498
+
+  Slice: Self-emp-inc
+    Precision: 0.7123
+    Recall:    0.8814
+    F-Beta:    0.7879
+    N:         212
 
   Slice: Federal-gov
-    Precision: 0.7397
-    Recall:    0.7397
-    FBeta:     0.7397
-    N:         196
+    Precision: 0.6818
+    Recall:    0.8571
+    F-Beta:    0.7595
+    N:         191
 
-  Slice: Without-pay
-    Precision: 1.0000
-    Recall:    1.0000
-    FBeta:     1.0000
-    N:         5
+  Slice: Local-gov
+    Precision: 0.6934
+    Recall:    0.8636
+    F-Beta:    0.7692
+    N:         387
+
+  Slice: ?
+    Precision: 0.5319
+    Recall:    0.5952
+    F-Beta:    0.5618
+    N:         389
 
 === Feature: education ===
-  Slice: Bachelors
-    Precision: 0.7600
-    Recall:    0.7566
-    FBeta:     0.7583
-    N:         1077
-
   Slice: Some-college
-    Precision: 0.6575
-    Recall:    0.5161
-    FBeta:     0.5783
-    N:         1404
+    Precision: 0.5797
+    Recall:    0.7617
+    F-Beta:    0.6583
+    N:         1485
 
   Slice: HS-grad
-    Precision: 0.5942
-    Recall:    0.3773
-    FBeta:     0.4615
-    N:         2142
+    Precision: 0.5209
+    Recall:    0.6493
+    F-Beta:    0.5781
+    N:         2085
 
-  Slice: 10th
-    Precision: 0.4444
-    Recall:    0.4000
-    FBeta:     0.4211
-    N:         187
+  Slice: Bachelors
+    Precision: 0.6982
+    Recall:    0.8844
+    F-Beta:    0.7804
+    N:         1053
 
   Slice: Masters
-    Precision: 0.8158
-    Recall:    0.8158
-    FBeta:     0.8158
-    N:         333
+    Precision: 0.7755
+    Recall:    0.9179
+    F-Beta:    0.8407
+    N:         369
+
+  Slice: Assoc-acdm
+    Precision: 0.5938
+    Recall:    0.8085
+    F-Beta:    0.6847
+    N:         198
+
+  Slice: 7th-8th
+    Precision: 0.6667
+    Recall:    0.3333
+    F-Beta:    0.4444
+    N:         141
+
+  Slice: 11th
+    Precision: 1.0000
+    Recall:    0.2727
+    F-Beta:    0.4286
+    N:         225
 
   Slice: Assoc-voc
-    Precision: 0.6400
-    Recall:    0.4444
-    FBeta:     0.5246
-    N:         264
+    Precision: 0.5349
+    Recall:    0.7302
+    F-Beta:    0.6174
+    N:         273
+
+  Slice: Prof-school
+    Precision: 0.7905
+    Recall:    0.9881
+    F-Beta:    0.8783
+    N:         116
 
   Slice: 9th
     Precision: 1.0000
-    Recall:    0.2000
-    FBeta:     0.3333
-    N:         96
-
-  Slice: 11th
-    Precision: 0.8000
     Recall:    0.3333
-    FBeta:     0.4706
-    N:         233
-
-  Slice: 12th
-    Precision: 1.0000
-    Recall:    0.2857
-    FBeta:     0.4444
-    N:         87
-
-  Slice: 7th-8th
-    Precision: 0.7500
-    Recall:    0.2500
-    FBeta:     0.3750
-    N:         130
-
-  Slice: Prof-school
-    Precision: 0.8851
-    Recall:    0.9625
-    FBeta:     0.9222
-    N:         112
-
-  Slice: Assoc-acdm
-    Precision: 0.8333
-    Recall:    0.6780
-    FBeta:     0.7477
-    N:         232
+    F-Beta:    0.5000
+    N:         115
 
   Slice: 5th-6th
     Precision: 1.0000
-    Recall:    0.4000
-    FBeta:     0.5714
-    N:         76
+    Recall:    0.5000
+    F-Beta:    0.6667
+    N:         62
+
+  Slice: 10th
+    Precision: 0.2727
+    Recall:    0.2500
+    F-Beta:    0.2609
+    N:         183
 
   Slice: Doctorate
-    Precision: 0.8471
-    Recall:    0.9730
-    FBeta:     0.9057
-    N:         91
+    Precision: 0.7778
+    Recall:    0.9825
+    F-Beta:    0.8682
+    N:         77
+
+  Slice: 12th
+    Precision: 1.0000
+    Recall:    0.4000
+    F-Beta:    0.5714
+    N:         98
 
   Slice: 1st-4th
     Precision: 1.0000
-    Recall:    0.0000
-    FBeta:     0.0000
-    N:         42
+    Recall:    1.0000
+    F-Beta:    1.0000
+    N:         23
 
   Slice: Preschool
     Precision: 1.0000
     Recall:    1.0000
-    FBeta:     1.0000
-    N:         7
+    F-Beta:    1.0000
+    N:         10
 
 === Feature: marital-status ===
+  Slice: Divorced
+    Precision: 0.7222
+    Recall:    0.5049
+    F-Beta:    0.5943
+    N:         920
+
   Slice: Married-civ-spouse
-    Precision: 0.7338
-    Recall:    0.6761
-    FBeta:     0.7038
-    N:         3011
+    Precision: 0.6400
+    Recall:    0.8647
+    F-Beta:    0.7356
+    N:         2950
 
   Slice: Never-married
-    Precision: 0.8750
-    Recall:    0.3977
-    FBeta:     0.5469
-    N:         2124
-
-  Slice: Divorced
-    Precision: 0.6429
-    Recall:    0.3293
-    FBeta:     0.4355
-    N:         879
-
-  Slice: Married-spouse-absent
-    Precision: 1.0000
-    Recall:    0.2500
-    FBeta:     0.4000
-    N:         83
-
-  Slice: Widowed
-    Precision: 1.0000
-    Recall:    0.2353
-    FBeta:     0.3810
-    N:         202
+    Precision: 0.6000
+    Recall:    0.4951
+    F-Beta:    0.5426
+    N:         2126
 
   Slice: Separated
-    Precision: 0.8333
-    Recall:    0.2632
-    FBeta:     0.4000
-    N:         211
+    Precision: 0.8182
+    Recall:    0.4737
+    F-Beta:    0.6000
+    N:         209
 
-=== Feature: occupation ===
-  Slice: ?
-    Precision: 0.6061
-    Recall:    0.6061
-    FBeta:     0.6061
-    N:         383
-
-  Slice: Farming-fishing
-    Precision: 0.5385
-    Recall:    0.3500
-    FBeta:     0.4242
-    N:         201
-
-  Slice: Other-service
-    Precision: 0.7500
-    Recall:    0.1579
-    FBeta:     0.2609
-    N:         640
-
-  Slice: Exec-managerial
-    Precision: 0.7813
-    Recall:    0.7552
-    FBeta:     0.7680
-    N:         799
-
-  Slice: Sales
-    Precision: 0.6903
-    Recall:    0.5544
-    FBeta:     0.6149
-    N:         697
-
-  Slice: Prof-specialty
-    Precision: 0.8070
-    Recall:    0.8070
-    FBeta:     0.8070
-    N:         830
-
-  Slice: Adm-clerical
-    Precision: 0.6625
-    Recall:    0.4953
-    FBeta:     0.5668
-    N:         761
-
-  Slice: Handlers-cleaners
-    Precision: 0.7000
-    Recall:    0.4118
-    FBeta:     0.5185
-    N:         289
-
-  Slice: Protective-serv
-    Precision: 0.7188
-    Recall:    0.5227
-    FBeta:     0.6053
-    N:         127
-
-  Slice: Craft-repair
-    Precision: 0.6029
-    Recall:    0.4686
-    FBeta:     0.5273
-    N:         809
-
-  Slice: Machine-op-inspct
-    Precision: 0.5517
-    Recall:    0.2963
-    FBeta:     0.3855
-    N:         388
-
-  Slice: Tech-support
-    Precision: 0.7091
-    Recall:    0.6500
-    FBeta:     0.6783
+  Slice: Widowed
+    Precision: 0.8000
+    Recall:    0.2105
+    F-Beta:    0.3333
     N:         208
 
-  Slice: Transport-moving
-    Precision: 0.7568
-    Recall:    0.3684
-    FBeta:     0.4956
-    N:         344
+  Slice: Married-spouse-absent
+    Precision: 0.6667
+    Recall:    0.5000
+    F-Beta:    0.5714
+    N:         96
+
+=== Feature: occupation ===
+  Slice: Adm-clerical
+    Precision: 0.5455
+    Recall:    0.7500
+    F-Beta:    0.6316
+    N:         726
+
+  Slice: Exec-managerial
+    Precision: 0.7336
+    Recall:    0.9018
+    F-Beta:    0.8090
+    N:         838
+
+  Slice: Machine-op-inspct
+    Precision: 0.4085
+    Recall:    0.6170
+    F-Beta:    0.4915
+    N:         378
+
+  Slice: Craft-repair
+    Precision: 0.5385
+    Recall:    0.7348
+    F-Beta:    0.6215
+    N:         821
+
+  Slice: Prof-specialty
+    Precision: 0.7398
+    Recall:    0.8776
+    F-Beta:    0.8028
+    N:         828
+
+  Slice: Sales
+    Precision: 0.6154
+    Recall:    0.8333
+    F-Beta:    0.7080
+    N:         729
+
+  Slice: Handlers-cleaners
+    Precision: 0.3750
+    Recall:    0.5000
+    F-Beta:    0.4286
+    N:         273
+
+  Slice: Other-service
+    Precision: 0.6429
+    Recall:    0.3462
+    F-Beta:    0.4500
+    N:         667
+
+  Slice: Protective-serv
+    Precision: 0.6458
+    Recall:    0.7381
+    F-Beta:    0.6889
+    N:         136
 
   Slice: Priv-house-serv
     Precision: 1.0000
     Recall:    1.0000
-    FBeta:     1.0000
-    N:         35
+    F-Beta:    1.0000
+    N:         26
+
+  Slice: Transport-moving
+    Precision: 0.4578
+    Recall:    0.5938
+    F-Beta:    0.5170
+    N:         317
+
+  Slice: ?
+    Precision: 0.5319
+    Recall:    0.5952
+    F-Beta:    0.5618
+    N:         389
+
+  Slice: Farming-fishing
+    Precision: 0.5333
+    Recall:    0.2857
+    F-Beta:    0.3721
+    N:         193
+
+  Slice: Tech-support
+    Precision: 0.6338
+    Recall:    0.8824
+    F-Beta:    0.7377
+    N:         189
 
 === Feature: relationship ===
-  Slice: Husband
-    Precision: 0.7312
-    Recall:    0.6722
-    FBeta:     0.7004
-    N:         2644
-
-  Slice: Own-child
-    Precision: 0.8000
-    Recall:    0.8000
-    FBeta:     0.8000
-    N:         1040
-
   Slice: Not-in-family
-    Precision: 0.7887
-    Recall:    0.3394
-    FBeta:     0.4746
-    N:         1648
-
-  Slice: Unmarried
-    Precision: 0.7059
-    Recall:    0.3000
-    FBeta:     0.4211
-    N:         676
-
-  Slice: Other-relative
-    Precision: 1.0000
-    Recall:    0.3750
-    FBeta:     0.5455
-    N:         191
+    Precision: 0.6556
+    Recall:    0.5266
+    F-Beta:    0.5841
+    N:         1702
 
   Slice: Wife
-    Precision: 0.7483
-    Recall:    0.7143
-    FBeta:     0.7309
-    N:         314
+    Precision: 0.6368
+    Recall:    0.8462
+    F-Beta:    0.7267
+    N:         322
+
+  Slice: Husband
+    Precision: 0.6408
+    Recall:    0.8692
+    F-Beta:    0.7378
+    N:         2590
+
+  Slice: Unmarried
+    Precision: 0.7273
+    Recall:    0.3556
+    F-Beta:    0.4776
+    N:         702
+
+  Slice: Own-child
+    Precision: 0.7500
+    Recall:    0.1765
+    F-Beta:    0.2857
+    N:         1019
+
+  Slice: Other-relative
+    Precision: 0.7500
+    Recall:    0.3750
+    F-Beta:    0.5000
+    N:         178
 
 === Feature: race ===
   Slice: White
-    Precision: 0.7356
-    Recall:    0.6339
-    FBeta:     0.6810
-    N:         5585
+    Precision: 0.6427
+    Recall:    0.8025
+    F-Beta:    0.7138
+    N:         5595
 
   Slice: Black
-    Precision: 0.6964
-    Recall:    0.5493
-    FBeta:     0.6142
-    N:         629
-
-  Slice: Amer-Indian-Eskimo
-    Precision: 0.7500
-    Recall:    0.6000
-    FBeta:     0.6667
-    N:         56
-
-  Slice: Asian-Pac-Islander
-    Precision: 0.7857
-    Recall:    0.6600
-    FBeta:     0.7174
-    N:         193
+    Precision: 0.6136
+    Recall:    0.8308
+    F-Beta:    0.7059
+    N:         599
 
   Slice: Other
-    Precision: 1.0000
-    Recall:    0.7143
-    FBeta:     0.8333
-    N:         50
+    Precision: 0.6667
+    Recall:    0.6667
+    F-Beta:    0.6667
+    N:         55
+
+  Slice: Asian-Pac-Islander
+    Precision: 0.7000
+    Recall:    0.7903
+    F-Beta:    0.7424
+    N:         193
+
+  Slice: Amer-Indian-Eskimo
+    Precision: 0.5455
+    Recall:    0.6000
+    F-Beta:    0.5714
+    N:         71
 
 === Feature: sex ===
-  Slice: Male
-    Precision: 0.7366
-    Recall:    0.6353
-    FBeta:     0.6822
-    N:         4388
-
   Slice: Female
-    Precision: 0.7366
-    Recall:    0.6062
-    FBeta:     0.6650
-    N:         2125
+    Precision: 0.6292
+    Recall:    0.6481
+    F-Beta:    0.6385
+    N:         2126
 
-=== Feature: native-country ===
-  Slice: United-States
-    Precision: 0.7374
-    Recall:    0.6291
-    FBeta:     0.6790
-    N:         5831
-
-  Slice: El-Salvador
-    Precision: 1.0000
-    Recall:    0.5000
-    FBeta:     0.6667
-    N:         29
-
-  Slice: Peru
-    Precision: 1.0000
-    Recall:    1.0000
-    FBeta:     1.0000
-    N:         6
-
-  Slice: Germany
-    Precision: 0.5556
-    Recall:    0.5556
-    FBeta:     0.5556
-    N:         27
-
-  Slice: England
-    Precision: 0.7143
-    Recall:    0.6250
-    FBeta:     0.6667
-    N:         16
-
-  Slice: Mexico
-    Precision: 1.0000
-    Recall:    0.1111
-    FBeta:     0.2000
-    N:         145
-
-  Slice: ?
-    Precision: 0.6667
-    Recall:    0.7333
-    FBeta:     0.6984
-    N:         116
-
-  Slice: Haiti
-    Precision: 0.0000
-    Recall:    0.0000
-    FBeta:     0.0000
-    N:         10
-
-  Slice: Philippines
-    Precision: 1.0000
-    Recall:    1.0000
-    FBeta:     1.0000
-    N:         39
-
-  Slice: Iran
-    Precision: 0.5000
-    Recall:    0.5000
-    FBeta:     0.5000
-    N:         8
-
-  Slice: Columbia
-    Precision: 1.0000
-    Recall:    1.0000
-    FBeta:     1.0000
-    N:         8
-
-  Slice: Canada
-    Precision: 0.6250
-    Recall:    0.6250
-    FBeta:     0.6250
-    N:         23
-
-  Slice: Japan
-    Precision: 1.0000
-    Recall:    1.0000
-    FBeta:     1.0000
-    N:         9
-
-  Slice: Portugal
-    Precision: 1.0000
-    Recall:    1.0000
-    FBeta:     1.0000
-    N:         7
-
-  Slice: Cuba
-    Precision: 0.6667
-    Recall:    0.5000
-    FBeta:     0.5714
-    N:         19
-
-  Slice: Dominican-Republic
-    Precision: 1.0000
-    Recall:    1.0000
-    FBeta:     1.0000
-    N:         9
-
-  Slice: Italy
-    Precision: 1.0000
-    Recall:    0.5000
-    FBeta:     0.6667
-    N:         13
-
-  Slice: South
-    Precision: 1.0000
-    Recall:    0.0000
-    FBeta:     0.0000
-    N:         18
-
-  Slice: Jamaica
-    Precision: 0.5000
-    Recall:    0.5000
-    FBeta:     0.5000
-    N:         25
-
-  Slice: Poland
-    Precision: 1.0000
-    Recall:    1.0000
-    FBeta:     1.0000
-    N:         13
-
-  Slice: France
-    Precision: 1.0000
-    Recall:    0.6667
-    FBeta:     0.8000
-    N:         8
-
-  Slice: Greece
-    Precision: 1.0000
-    Recall:    1.0000
-    FBeta:     1.0000
-    N:         6
-
-  Slice: Puerto-Rico
-    Precision: 0.0000
-    Recall:    1.0000
-    FBeta:     0.0000
-    N:         20
-
-  Slice: Ecuador
-    Precision: 0.0000
-    Recall:    1.0000
-    FBeta:     0.0000
-    N:         5
-
-  Slice: China
-    Precision: 1.0000
-    Recall:    0.0000
-    FBeta:     0.0000
-    N:         9
-
-  Slice: Taiwan
-    Precision: 0.7143
-    Recall:    1.0000
-    FBeta:     0.8333
-    N:         14
-
-  Slice: Vietnam
-    Precision: 1.0000
-    Recall:    1.0000
-    FBeta:     1.0000
-    N:         7
-
-  Slice: India
-    Precision: 0.8333
-    Recall:    0.8333
-    FBeta:     0.8333
-    N:         15
-
-  Slice: Hong
-    Precision: 1.0000
-    Recall:    0.7500
-    FBeta:     0.8571
-    N:         6
-
-  Slice: Honduras
-    Precision: 1.0000
-    Recall:    1.0000
-    FBeta:     1.0000
-    N:         5
-
-  Slice: Laos
-    Precision: 1.0000
-    Recall:    1.0000
-    FBeta:     1.0000
-    N:         5
-
-  Slice: Nicaragua
-    Precision: 0.0000
-    Recall:    1.0000
-    FBeta:     0.0000
-    N:         6
-
-  Slice: Guatemala
-    Precision: 1.0000
-    Recall:    0.0000
-    FBeta:     0.0000
-    N:         13
-
-  Slice: Trinadad&Tobago
-    Precision: 1.0000
-    Recall:    1.0000
-    FBeta:     1.0000
-    N:         6
+  Slice: Male
+    Precision: 0.6449
+    Recall:    0.8281
+    F-Beta:    0.7251
+    N:         4387
 

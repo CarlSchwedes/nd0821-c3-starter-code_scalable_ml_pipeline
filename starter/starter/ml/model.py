@@ -1,7 +1,9 @@
 import pickle
 from sklearn.metrics import fbeta_score, precision_score, recall_score
+from sklearn.model_selection import GridSearchCV
 from sklearn.ensemble import RandomForestClassifier
-from ml.data import process_data
+
+from .data import process_data
 
 
 def train_model(X_train, y_train):
@@ -19,10 +21,29 @@ def train_model(X_train, y_train):
     model : RandomForestClassifier
         Trained machine learning model.
     """
-    rf_clss_model = RandomForestClassifier()
-    rf_clss_model.fit(X_train, y_train)
+    rf = RandomForestClassifier(random_state=42)
 
-    return rf_clss_model
+    grid = {
+        "n_estimators": [200, 300],
+        "max_depth": [20, None],
+        "min_samples_split": [2, 5],
+        "min_samples_leaf": [1, 2],
+        "class_weight": ["balanced"]
+    }
+
+    clf = GridSearchCV(
+        rf,
+        grid,
+        cv=3,
+        scoring="f1",
+        n_jobs=1,
+        verbose=1
+    )
+
+    clf.fit(X_train, y_train)
+
+    return clf.best_estimator_
+
 
 def save_model(model, path):
     with open(path, 'wb') as file:

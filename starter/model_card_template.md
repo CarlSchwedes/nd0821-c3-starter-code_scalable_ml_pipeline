@@ -20,8 +20,8 @@ The model is intended to **predict income category (`<=50K` or `>50K`)** for adu
 
 ## 3. Training Data
 The model was trained on the **UCI Adult Census dataset**. The dataset includes the following columns:
-- Numerical: `age`, `fnlgt`, `education-num`, `capital-gain`, `capital-loss`, `hours-per-week`
-- Categorical: `workclass`, `education`, `marital-status`, `occupation`, `relationship`, `race`, `sex`, `native-country`
+- Numerical: `age`, `education-num`, `capital-gain`, `capital-loss`, `hours-per-week`
+- Categorical: `workclass`, `education`, `marital-status`, `occupation`, `relationship`, `race`, `sex`
 - Target: `salary`
 
 Data preprocessing steps included:
@@ -34,9 +34,16 @@ Data preprocessing steps included:
 ### Algorithm
 - **RandomForestClassifier** from scikit‑learn
 - Hyperparameters:
-  - n_estimators = 100 (default)
-  - max_depth = None
+  - n_estimators = 300
+  - class_weight = 'balanced'
+  - min_samples_leaf = 2
+  - min_samples_split = 5
   - random_state = 42
+
+FINAL MODEL PERFORMANCE:
+  - Precision: 0.6430
+  - Recall:    0.8014
+  - F-Beta:    0.7135
 
 ### Why RandomForest?
 - Handles non-linear relationships
@@ -113,7 +120,6 @@ curl -X POST "http://localhost:8000/infer"     -H "Content-Type: application/jso
 ```
 
 ## 10. Future Improvements
-- Hyperparameter tuning (GridSearch / Optuna)
 - Better fairness evaluation with Aequitas
 - Updating dataset to modern census records
 - Model compression for faster inference

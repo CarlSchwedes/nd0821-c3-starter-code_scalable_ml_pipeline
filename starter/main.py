@@ -1,42 +1,64 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
+import numpy as np
 import pandas as pd
+
 from starter.ml.data import process_data
 from starter.ml.model import inference, load_model
 
 
-def clean_hyphens(string: str) -> str:
-    return string.replace('_', '-')
+# -------------------------------------------------------------
+# Helpers
+# -------------------------------------------------------------
+def alias_cleaner(string: str) -> str:
+    """
+    Pydantic model fields use underscores, but the dataset uses hyphens
+    (e.g. marital-status, education-num).
+    This function maps endpoint_input.education_num → "education-num" etc.
+    """
+    return string.replace('_', '-' )
 
 
+# -------------------------------------------------------------
+# Input Schema for FastAPI
+# -------------------------------------------------------------
 class CensusData(BaseModel):
-    age: int = 39
-    workclass: str = 'Private'
-    fnlgt: int = 123456
-    education: str = 'Bachelor'
-    education_num: int = 13
-    marital_status: str = 'Never-married'
-    occupation: str = 'Tech-support'
-    relationship: str = 'Not-in-family'
-    race: str = 'White'
-    sex: str = 'Male'
-    capital_gain: int = 0
-    capital_loss: int = 0
-    hours_per_week: int = 40
-    native_country: str = 'United-States'
+    age: int
+    workclass: str
+    education: str
+    education_num: int
+    marital_status: str
+    occupation: str
+    relationship: str
+    race: str
+    sex: str
+    capital_gain: int
+    capital_loss: int
+    hours_per_week: int
 
-    class Config:
-        clean = clean_hyphens
+    model_config = {
+        "populate_by_name": True,
+        "alias_generator": alias_cleaner,
+        "extra": "ignore"
+    }
 
 
-app = FastAPI(title="Scalable ML Pipeline - Inference API",
-              description="API that runs random-forest model inference on sample dataset",
-              version="1.0.0")
 
-model = load_model('./model/rf_clss_model.pkl')
-encoder = load_model('./model/encoder.pkl')
-lb = load_model('./model/lbinarizer.pkl')
+# -------------------------------------------------------------
+# App initialization
+# -------------------------------------------------------------
+app = FastAPI(
+    title="Scalable ML Pipeline - Inference API",
+    description="Random Forest income inference API",
+    version="1.0.0"
+)
 
+# Load model artifacts
+model = load_model("./model/rf_clss_model.pkl")
+encoder = load_model("./model/encoder.pkl")
+lb = load_model("./model/lbinarizer.pkl")
+
+# Expected categorical features (MUST match training order)
 cat_features = [
     "workclass",
     "education",
@@ -44,38 +66,38 @@ cat_features = [
     "occupation",
     "relationship",
     "race",
-    "sex",
-    "native-country",
+    "sex"
 ]
 
 
+# -------------------------------------------------------------
+# Endpoints
+# -------------------------------------------------------------
 @app.get("/")
-async def greet_user():
-    return {
-        "data": "Hello, this is a scalable ML pipeline project..."
-    }
+async def root():
+    return {"message": "Welcome to the income prediction API!"}
 
 
 @app.post("/inference")
-async def model_predict(endpoint_input: CensusData):
-    endpoint_input_dict = endpoint_input.dict(by_alias=True)
-    model_input = pd.DataFrame([endpoint_input_dict])
+async def run_inference(record: CensusData):
+    # Convert Pydantic input to a DataFrame
+    record_dict = record.model_dump(by_alias=True)
+    input_df = pd.DataFrame([record_dict])
 
-    processed_model_input, _, _, _ = process_data(
-        model_input, categorical_features=cat_features, label=None, training=False, encoder=encoder, lb=lb
+    # Preprocess data to match model expectations
+    X, _, _, _ = process_data(
+        input_df,
+        categorical_features=cat_features,
+        label=None,
+        training=False,
+        encoder=encoder,
+        lb=lb
     )
 
-    inference_list = list(inference(model, processed_model_input))
+    # Run inference
+    pred = inference(model, X)[0]
 
-    result = {}
-    for i in range(len(inference_list)):
-        if inference_list[i] == 0:
-            result[i] = '<=50k'
-        else:
-            result[i] = '>50k'
+    # Convert numeric label back to its string class
+    prediction = lb.inverse_transform(np.array([[pred]]))[0]
 
-    return {"result": result}
-
-
-if __name__ == '__main__':
-    pass
+    return {"prediction": prediction}

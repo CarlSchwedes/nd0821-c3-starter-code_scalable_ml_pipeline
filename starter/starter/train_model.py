@@ -1,22 +1,39 @@
+
 import re
 import pandas as pd
-# Script to train machine learning model.
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import train_test_split, GridSearchCV
+from sklearn.ensemble import RandomForestClassifier
 
-# Add the necessary imports for the starter code.
 from ml.data import process_data
-from ml.model import train_model, save_model, compute_model_metrics, compute_slice_metrics, inference
+from ml.model import (
+    train_model,
+    save_model,
+    compute_model_metrics,
+    compute_slice_metrics,
+    inference,
+)
 
-# Add code to load in the data.
-data = pd.read_csv('./data/census.csv')
-# Remove any containing whitespaces from dataset.
+# ---------------------------------------------------------
+# 1. Load and Clean Data
+# ---------------------------------------------------------
+data = pd.read_csv("./data/census.csv")
+
+# Strip whitespace from column names and values
 data.columns = data.columns.str.strip()
-data = data.applymap(
+data = data.map(
     lambda x: re.sub(r"\s+", " ", x).strip() if isinstance(x, str) else x
 )
 
-# Optional enhancement, use K-fold cross validation instead of a train-test split.
-train, test = train_test_split(data, test_size=0.20)
+# ---------------------------------------------------------
+# 2. OPTIONAL Feature Removal (Improves Performance)
+# ---------------------------------------------------------
+# fnlgt and native-country often degrade model performance
+data = data.drop(columns=["fnlgt", "native-country"])
+
+# ---------------------------------------------------------
+# 3. Train/Test Split
+# ---------------------------------------------------------
+train, test = train_test_split(data, test_size=0.20, random_state=42)
 
 cat_features = [
     "workclass",
@@ -25,48 +42,81 @@ cat_features = [
     "occupation",
     "relationship",
     "race",
-    "sex",
-    "native-country",
+    "sex"
 ]
+
+# ---------------------------------------------------------
+# 4. Process Training Data
+# ---------------------------------------------------------
 X_train, y_train, encoder, lb = process_data(
-    train, categorical_features=cat_features, label="salary", training=True
+    train,
+    categorical_features=cat_features,
+    label="salary",
+    training=True
 )
 
-# Proces the test data with the process_data function.
-X_test_raw = test.drop("salary", axis=1)
-y_test_raw = test["salary"]
-
+# ---------------------------------------------------------
+# 5. Process Test Data
+# ---------------------------------------------------------
 X_test, y_test, _, _ = process_data(
-    test, categorical_features=cat_features, label="salary", training=False, encoder=encoder, lb=lb
+    test,
+    categorical_features=cat_features,
+    label="salary",
+    training=False,
+    encoder=encoder,
+    lb=lb
 )
 
-# Train and save a model.
-model = train_model(X_train, y_train)
+# ---------------------------------------------------------
+# 6. Hyperparameter‑Tuned RandomForest Model
+# ---------------------------------------------------------
+print("\nRunning hyperparameter search...")
 
-preds = inference(model, X_test)
+best_model = train_model(X_train, y_train)
+print(f"\nBest model: {best_model}")
 
+# ---------------------------------------------------------
+# 7. Evaluate Model
+# ---------------------------------------------------------
+preds = inference(best_model, X_test)
 precision, recall, fbeta = compute_model_metrics(y_test, preds)
-print(f"\nModel: Random-Forest-Classifier:\nprecision:{precision}, recall:{recall}, fbeta: {fbeta}\n")
+
+print("\nFINAL MODEL PERFORMANCE:")
+print(f"  Precision: {precision:.4f}")
+print(f"  Recall:    {recall:.4f}")
+print(f"  F-Beta:    {fbeta:.4f}\n")
+
+# ---------------------------------------------------------
+# 8. Slice Metrics
+# ---------------------------------------------------------
+print("Computing slice metrics...")
 
 slice_metrics = compute_slice_metrics(
-    model=model,
+    model=best_model,
     X=test,
-    label='salary',
+    label="salary",
     encoder=encoder,
     lb=lb,
     categorical_features=cat_features
 )
 
 with open("slice_output.txt", "w") as f:
-    for feature, cats in slice_metrics.items():
+    for feature, categories in slice_metrics.items():
         f.write(f"=== Feature: {feature} ===\n")
-        for category, metrics in cats.items():
+        for category, metrics in categories.items():
             f.write(f"  Slice: {category}\n")
             f.write(f"    Precision: {metrics['precision']:.4f}\n")
             f.write(f"    Recall:    {metrics['recall']:.4f}\n")
-            f.write(f"    FBeta:     {metrics['fbeta']:.4f}\n")
+            f.write(f"    F-Beta:    {metrics['fbeta']:.4f}\n")
             f.write(f"    N:         {metrics['n_samples']}\n\n")
 
-save_model(model, './model/rf_clss_model.pkl')
-save_model(encoder, './model/encoder.pkl')
-save_model(lb, './model/lbinarizer.pkl')
+print("Slice metrics saved to slice_output.txt")
+
+# ---------------------------------------------------------
+# 9. Save All Artifacts
+# ---------------------------------------------------------
+save_model(best_model, "./model/rf_clss_model.pkl")
+save_model(encoder, "./model/encoder.pkl")
+save_model(lb, "./model/lbinarizer.pkl")
+
+print("Saved model artifacts successfully.\n")
