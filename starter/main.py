@@ -1,3 +1,4 @@
+from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from pydantic import BaseModel
 import numpy as np
@@ -46,22 +47,24 @@ class CensusData(BaseModel):
 # -------------------------------------------------------------
 # App initialization
 # -------------------------------------------------------------
-app = FastAPI(
-    title="Scalable ML Pipeline - Inference API",
-    description="Random Forest income inference API",
-    version="1.0.0"
-)
-
 model = None
 encoder = None
 lb = None
 
-@app.on_event("startup")
-def load_artifacts():
+@asynccontextmanager
+async def lifespan(app: FastAPI):
     global model, encoder, lb
     model = load_model("./model/rf_clss_model.pkl")
     encoder = load_model("./model/encoder.pkl")
     lb = load_model("./model/lbinarizer.pkl")
+    yield   # App is running
+
+app = FastAPI(
+    title="Scalable ML Pipeline - Inference API",
+    description="Random Forest income inference API",
+    version="1.0.0",
+    lifespan=lifespan
+)
 
 
 # Expected categorical features (MUST match training order)
