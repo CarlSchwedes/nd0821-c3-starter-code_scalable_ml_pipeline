@@ -21,11 +21,10 @@ requests
 
 # Data science libraries
 pandas
-numpy==1.26.4
+numpy
 matplotlib
 seaborn
-scipy==1.11.4
-scikit-learn==1.3.2
+scikit-learn
 
 
 # Jupyter support
