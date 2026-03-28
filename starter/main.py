@@ -43,7 +43,6 @@ class CensusData(BaseModel):
     }
 
 
-
 # -------------------------------------------------------------
 # App initialization
 # -------------------------------------------------------------
@@ -53,10 +52,17 @@ app = FastAPI(
     version="1.0.0"
 )
 
-# Load model artifacts
-model = load_model("./model/rf_clss_model.pkl")
-encoder = load_model("./model/encoder.pkl")
-lb = load_model("./model/lbinarizer.pkl")
+model = None
+encoder = None
+lb = None
+
+@app.on_event("startup")
+def load_artifacts():
+    global model, encoder, lb
+    model = load_model("./model/rf_clss_model.pkl")
+    encoder = load_model("./model/encoder.pkl")
+    lb = load_model("./model/lbinarizer.pkl")
+
 
 # Expected categorical features (MUST match training order)
 cat_features = [
